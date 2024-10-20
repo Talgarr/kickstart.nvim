@@ -76,7 +76,7 @@ Kickstart Guide:
     Feel free to delete them once you know what you're doing, but they should serve as a guide
     for when you are first encountering a few different constructs in your Neovim config.
 
-If you experience any errors while trying to install kickstart, run `:checkhealth` for more info.
+If you experience any errors while trying to install kickstart, run `:checkhealth` for more info.init
 
 I hope you enjoy your Neovim journey,
 - TJ
