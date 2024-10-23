@@ -46,3 +46,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- vim: ts=2 sts=2 sw=2 et
+
+-- Add reset view to middle when jumping
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Jump half a page up and center the view' })
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Jump half a page down and center the view' })
