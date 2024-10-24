@@ -4,4 +4,6 @@
 -- See the kickstart.nvim README for more information
 require 'custom.plugins.go'
 
-return { 'ThePrimeagen/vim-be-good' }
+return {
+  'ThePrimeagen/vim-be-good',
+}
