@@ -52,3 +52,12 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Jump half a page up and center
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Jump half a page down and center the view' })
 vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Search for the next text and center the view.' })
 vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Search for the previous text and center the view.' })
+
+-- Copilot Chat
+-- Quick chat with Copilot
+vim.keymap.set('n', '<leader>ccq', function()
+  local input = vim.fn.input 'Quick Chat: '
+  if input ~= '' then
+    require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
+  end
+end, { desc = 'CopilotChat - Quick chat' })
