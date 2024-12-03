@@ -6,6 +6,9 @@ require 'custom.plugins.go'
 
 require 'custom.plugins.copilotchat'
 
+require 'custom.plugins.vimtex'
+
 return {
   'ThePrimeagen/vim-be-good',
+  'brenoprata10/nvim-highlight-colors',
 }
