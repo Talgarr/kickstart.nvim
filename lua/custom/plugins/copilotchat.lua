@@ -1,3 +1,4 @@
+vim.g.copilot_enabled = false
 return {
   'CopilotC-Nvim/CopilotChat.nvim',
   dependencies = {
