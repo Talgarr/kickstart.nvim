@@ -10,6 +10,8 @@ require 'custom.plugins.vimtex'
 
 require 'custom.plugins.piper'
 
+require 'custom.plugins.oil'
+
 return {
   'ThePrimeagen/vim-be-good',
   'brenoprata10/nvim-highlight-colors',
