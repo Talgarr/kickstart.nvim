@@ -11,6 +11,5 @@ require 'custom.plugins.vimtex'
 require 'custom.plugins.piper'
 
 return {
-  'ThePrimeagen/vim-be-good',
   'brenoprata10/nvim-highlight-colors',
 }
