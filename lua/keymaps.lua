@@ -61,6 +61,3 @@ vim.keymap.set('n', '<leader>ccq', function()
     require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
   end
 end, { desc = 'CopilotChat - Quick chat' })
-
--- Oil
-vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open Oil File Explorer' })
