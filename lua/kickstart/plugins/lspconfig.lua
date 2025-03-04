@@ -178,6 +178,7 @@ return {
         gopls = {},
         html = {},
         jdtls = {},
+        jsonls = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -198,6 +199,7 @@ return {
         stimulus_ls = {},
         texlab = {},
         tflint = {},
+        vale_ls = {},
         yamlls = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -252,6 +254,7 @@ return {
           'gopls',
           'html',
           'jdtls',
+          'jsonls',
           'lua_ls',
           'powershell_es',
           'pyright',
@@ -259,6 +262,7 @@ return {
           'stimulus_ls',
           'texlab',
           'tflint',
+          'vale_ls',
           'yamlls',
         },
       }
