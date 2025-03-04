@@ -23,6 +23,8 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'mfussenegger/nvim-dap-python',
+    'mrcjkb/rustaceanvim',
   },
   keys = function(_, keys)
     local dap = require 'dap'
@@ -63,7 +65,13 @@ return {
       -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
+        -- DAP: https://github.com/jay-babu/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
         'delve',
+        'python',
+        'bash',
+        'cppdbg',
+        'javadbg',
+        'js',
       },
     }
 
@@ -83,5 +91,12 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+
+    -- Install python
+    local python = vim.fn.expand '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
+    require('dap-python').setup(python)
+
+    -- Install Rust
+    -- require('rustaceanvim').setup()
   end,
 }
