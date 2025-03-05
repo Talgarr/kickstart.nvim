@@ -10,6 +10,8 @@ require 'custom.plugins.vimtex'
 
 require 'custom.plugins.piper'
 
+require 'custom.plugins.neogit'
+
 return {
   'brenoprata10/nvim-highlight-colors',
 }
