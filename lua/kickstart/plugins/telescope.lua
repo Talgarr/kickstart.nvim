@@ -89,7 +89,11 @@ return {
         builtin.find_files { hidden = true }
       end, { desc = '[S]earch [H]idden [F]iles' })
       vim.keymap.set('n', '<Leader>shg', function()
-        builtin.live_grep { '--hidden' }
+        builtin.live_grep {
+          additional_args = function(_)
+            return { '--hidden' }
+          end,
+        }
       end, { desc = '[S]earch [H]idden by [G]iles' })
 
       -- Slightly advanced example of overriding default behavior and theme
