@@ -200,7 +200,15 @@ return {
         texlab = {},
         tflint = {},
         vale_ls = {},
-        yamlls = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              schemas = {
+                ['https://json.schemastore.org/github-workflow.json'] = '.github/workflows/*',
+              },
+            },
+          },
+        },
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
