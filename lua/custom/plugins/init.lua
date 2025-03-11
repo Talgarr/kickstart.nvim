@@ -2,16 +2,4 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-require 'custom.plugins.go'
-
-require 'custom.plugins.copilotchat'
-
-require 'custom.plugins.vimtex'
-
-require 'custom.plugins.piper'
-
-require 'custom.plugins.neogit'
-
-return {
-  'brenoprata10/nvim-highlight-colors',
-}
+return {}
