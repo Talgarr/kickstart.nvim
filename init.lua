@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -422,6 +422,16 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<Leader>shf', function()
+        builtin.find_files { hidden = true }
+      end, { desc = '[S]earch [H]idden [F]iles' })
+      vim.keymap.set('n', '<Leader>shg', function()
+        builtin.live_grep {
+          additional_args = function(_)
+            return { '--hidden' }
+          end,
+        }
+      end, { desc = '[S]earch [H]idden by [G]iles' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -671,6 +681,18 @@ require('lazy').setup({
         -- ts_ls = {},
         --
 
+        asm_lsp = {},
+        azure_pipelines_ls = {},
+        bashls = {},
+        clangd = {},
+        cssls = {},
+        denols = {},
+        docker_compose_language_service = {},
+        dockerls = {},
+        gopls = {},
+        html = {},
+        jdtls = {},
+        jsonls = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -682,6 +704,22 @@ require('lazy').setup({
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+        powershell_es = {},
+        pyright = {},
+        rust_analyzer = {},
+        stimulus_ls = {},
+        texlab = {},
+        tflint = {},
+        vale_ls = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              schemas = {
+                ['https://json.schemastore.org/github-workflow.json'] = '.github/workflows/*',
+              },
             },
           },
         },
@@ -702,7 +740,28 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
+        'asm_lsp',
+        'azure_pipelines_ls',
+        'bashls',
+        'clangd',
+        'cssls',
+        'denols',
+        'docker_compose_language_service',
+        'dockerls',
+        'gopls',
+        'html',
+        'jdtls',
+        'jsonls',
+        'lua_ls',
+        'powershell_es',
+        'pyright',
+        'rust_analyzer',
+        'stimulus_ls',
         'stylua', -- Used to format Lua code
+        'texlab',
+        'tflint',
+        'vale_ls',
+        'yamlls',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -960,7 +1019,8 @@ require('lazy').setup({
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
+        disable = { 'latex' },
+        additional_vim_regex_highlighting = { 'latex', 'markdown', 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
     },
@@ -981,18 +1041,18 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
