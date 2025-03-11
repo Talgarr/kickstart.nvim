@@ -12,6 +12,12 @@ require 'custom.plugins.piper'
 
 require 'custom.plugins.neogit'
 
+-- Add reset view to middle when jumping
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Jump half a page up and center the view' })
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Jump half a page down and center the view' })
+vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Search for the next text and center the view.' })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Search for the previous text and center the view.' })
+
 return {
   'brenoprata10/nvim-highlight-colors',
 }

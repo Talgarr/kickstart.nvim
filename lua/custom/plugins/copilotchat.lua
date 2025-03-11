@@ -1,4 +1,14 @@
 vim.g.copilot_enabled = false
+
+-- Copilot Chat
+-- Quick chat with Copilot
+vim.keymap.set('n', '<leader>ccq', function()
+  local input = vim.fn.input 'Quick Chat: '
+  if input ~= '' then
+    require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
+  end
+end, { desc = 'CopilotChat - Quick chat' })
+
 return {
   {
     'CopilotC-Nvim/CopilotChat.nvim',
