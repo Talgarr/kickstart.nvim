@@ -986,6 +986,12 @@ require('lazy').setup({
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
+      local hipatterns = require 'mini.hipatterns'
+      hipatterns.setup {
+        highlighters = {
+          hex_color = hipatterns.gen_highlighter.hex_color(),
+        },
+      }
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin

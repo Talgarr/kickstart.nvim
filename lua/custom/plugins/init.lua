@@ -10,7 +10,9 @@ require 'custom.plugins.vimtex'
 
 require 'custom.plugins.piper'
 
-require 'custom.plugins.neogit'
+require 'custom.plugins.lazygit'
+
+require 'custom.plugins.csv'
 
 -- Add reset view to middle when jumping
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Jump half a page up and center the view' })
