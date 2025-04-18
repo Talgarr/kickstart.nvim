@@ -685,13 +685,15 @@ require('lazy').setup({
         azure_pipelines_ls = {},
         bashls = {},
         clangd = {},
+        csharp_ls = {},
         cssls = {},
         denols = {},
         docker_compose_language_service = {},
         dockerls = {},
+        elixirls = {},
         gopls = {},
-        hyprls = {},
         html = {},
+        hyprls = {},
         jdtls = {},
         jsonls = {},
         lua_ls = {
@@ -745,13 +747,15 @@ require('lazy').setup({
         'azure_pipelines_ls',
         'bashls',
         'clangd',
+        'csharp_ls',
         'cssls',
         'denols',
         'docker_compose_language_service',
         'dockerls',
+        'elixirls',
         'gopls',
-        'hyprls',
         'html',
+        'hyprls',
         'jdtls',
         'jsonls',
         'lua_ls',
@@ -1100,6 +1104,3 @@ require('lazy').setup({
     },
   },
 })
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et

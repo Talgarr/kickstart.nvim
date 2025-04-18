@@ -26,9 +26,6 @@ return {
 
     -- Python
     'mfussenegger/nvim-dap-python',
-
-    -- Rust
-    'mrcjkb/rustaceanvim',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -104,6 +101,7 @@ return {
         'python',
         'bash',
         'cppdbg',
+        'codelldb',
         'javadbg',
         'js',
       },
@@ -153,8 +151,5 @@ return {
     -- Install python
     local python = vim.fn.expand '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
     require('dap-python').setup(python)
-
-    -- Install Rust
-    require('rustaceanvim').setup()
   end,
 }
