@@ -9,6 +9,14 @@ vim.keymap.set('n', '<leader>ccq', function()
   end
 end, { desc = 'CopilotChat - Quick chat' })
 
+-- vim.keymap.set('n', '<leader>ccm', function()
+--     require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
+-- end, { desc = 'CopilotChat - Change' })
+
+vim.keymap.set('n', '<leader>cct', function()
+  vim.g.copilot_enabled = not vim.g.copilot_enabled
+end, { desc = 'Copilot - Toggle' })
+
 return {
   {
     'CopilotC-Nvim/CopilotChat.nvim',
@@ -18,8 +26,7 @@ return {
     },
     build = 'make tiktoken', -- Only on MacOS or Linux
     opts = {
-      -- See Configuration section for options
+      model = 'gemini-2.5-pro',
     },
-    -- See Commands section for default commands if you want to lazy load on them
   },
 }

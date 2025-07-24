@@ -189,6 +189,8 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+vim.keymap.set('n', '<leader>dl', vim.lsp.buf.hover, { desc = 'LSP: [D]ocumentation [L]SP' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -393,11 +395,15 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          file_ignore_patterns = {
+            'target/',
+            '.git/',
+          },
+          --   mappings = {
+          --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          --   },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -720,9 +726,12 @@ require('lazy').setup({
         yamlls = {
           settings = {
             yaml = {
-              schemas = {
-                ['https://json.schemastore.org/github-workflow.json'] = '.github/workflows/*',
+              schemaStore = {
+                enable = true,
               },
+              -- schemas = {
+              --   ['https://json.schemastore.org/github-workflow.json'] = '.github/workflows/*',
+              -- },
             },
           },
         },
