@@ -23,6 +23,9 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+
+    -- Python
+    'mfussenegger/nvim-dap-python',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -95,30 +98,30 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'python',
+        'bash',
+        'cppdbg',
+        'codelldb',
+        'javadbg',
+        'js',
       },
     }
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
-    dapui.setup {
-      -- Set icons to characters that are more likely to work in every terminal.
-      --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-      controls = {
-        icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
-        },
-      },
-    }
+    dapui.setup()
+
+    -- Change breakpoint icons
+    -- vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
+    -- vim.api.nvim_set_hl(0, 'DapStop', { fg = '#ffcc00' })
+    -- local breakpoint_icons = vim.g.have_nerd_font
+    --     and { Breakpoint = '', BreakpointCondition = '', BreakpointRejected = '', LogPoint = '', Stopped = '' }
+    --   or { Breakpoint = '●', BreakpointCondition = '⊜', BreakpointRejected = '⊘', LogPoint = '◆', Stopped = '⭔' }
+    -- for type, icon in pairs(breakpoint_icons) do
+    --   local tp = 'Dap' .. type
+    --   local hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'
+    --   vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
+    -- end
 
     -- Change breakpoint icons
     -- vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
@@ -142,6 +145,105 @@ return {
         -- On Windows delve must be run attached or it crashes.
         -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
         detached = vim.fn.has 'win32' == 0,
+      },
+    }
+
+    -- Install python
+    local python = vim.fn.expand '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
+    require('dap-python').setup(python)
+
+    dap.configurations.rust = {
+      {
+        name = 'Launch Program',
+        type = 'codelldb',
+        request = 'launch',
+        program = function()
+          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = function()
+          local input = vim.fn.input 'Arguments (space-separated): '
+          return vim.split(input, ' ')
+        end,
+      },
+    }
+
+    dap.adapters.bashdb = {
+      type = 'executable',
+      command = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/bash-debug-adapter',
+      name = 'bashdb',
+    }
+
+    dap.configurations.sh = {
+      {
+        type = 'bashdb',
+        request = 'launch',
+        name = 'Launch file',
+        showDebugOutput = false,
+        pathBashdb = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb',
+        pathBashdbLib = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir',
+        trace = true,
+        file = '${file}',
+        program = '${file}',
+        cwd = '${workspaceFolder}',
+        pathCat = 'cat',
+        pathBash = '/bin/bash',
+        pathMkfifo = 'mkfifo',
+        pathPkill = 'pkill',
+        argsString = '',
+        args = {},
+        env = {},
+        terminalKind = 'integrated',
+      },
+      {
+        type = 'bashdb',
+        request = 'launch',
+        name = 'Launch file with arguments',
+        showDebugOutput = false,
+        pathBashdb = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb',
+        pathBashdbLib = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/extension/bashdb_dir',
+        trace = true,
+        program = '${file}',
+        file = '${file}',
+        cwd = '${workspaceFolder}',
+        pathCat = 'cat',
+        pathBash = '/bin/bash',
+        pathMkfifo = 'mkfifo',
+        pathPkill = 'pkill',
+        argsString = '',
+        args = function()
+          local input = vim.fn.input 'Script arguments (space-separated): '
+          if input == '' then
+            return {}
+          end
+          return vim.split(input, ' ')
+        end,
+        env = {},
+        terminalKind = 'integrated',
+      },
+    }
+
+    dap.adapters.java = {
+      type = 'executable',
+      command = vim.fn.stdpath 'data' .. '/mason/packages/bash-debug-adapter/bash-debug-adapter',
+      name = 'javadbg',
+    }
+
+    dap.configurations.java = {
+      {
+        name = 'Launch Program',
+        type = 'javadbg',
+        request = 'launch',
+        program = function()
+          return vim.fn.input('Path to executable: ', vim.fn.getcwd(), 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = function()
+          local input = vim.fn.input 'Arguments (space-separated): '
+          return vim.split(input, ' ')
+        end,
       },
     }
   end,
