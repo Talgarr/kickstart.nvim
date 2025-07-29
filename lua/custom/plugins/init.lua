@@ -4,6 +4,8 @@
 -- See the kickstart.nvim README for more information
 require 'custom.plugins.go'
 
+require 'custom.plugins.copilot'
+
 require 'custom.plugins.copilotchat'
 
 require 'custom.plugins.vimtex'
